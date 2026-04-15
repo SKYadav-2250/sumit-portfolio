@@ -20,12 +20,12 @@ const Contact = () => {
           Available for opportunities
         </p>
 
-        <h2 className="text-6xl md:text-8xl font-light mb-12 tracking-tight">
+        <h2 className="text-5xl md:text-8xl font-light mb-12 tracking-tight">
           Let's work <br />
           <span className="font-serif italic text-white/90">together</span>
         </h2>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-lg font-medium">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-lg font-medium">
           <a
             href="mailto:skyadav225075@gmail.com"
             className="hover:text-white text-slate-400 transition-colors uppercase tracking-widest text-sm relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300"

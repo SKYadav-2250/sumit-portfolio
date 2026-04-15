@@ -27,9 +27,9 @@ const Hero = () => {
           Sumit <span className="font-serif italic text-white/90">Kumar</span> Yadav
         </h1>
 
-        <div className="text-xl md:text-3xl font-light text-slate-300 flex items-center justify-center gap-2 mb-10">
-          A 
-          <div className="relative h-[40px] overflow-hidden min-w-[280px]">
+        <div className="text-lg sm:text-xl md:text-3xl font-light text-slate-300 flex flex-col sm:flex-row items-center justify-center gap-2 mb-10">
+          <span>A</span>
+          <div className="relative h-[30px] sm:h-[40px] w-[200px] sm:w-[280px] overflow-hidden min-w-[200px]">
             <AnimatePresence mode="wait">
               <motion.span
                 key={roles[roleIndex]}
@@ -43,24 +43,24 @@ const Hero = () => {
               </motion.span>
             </AnimatePresence>
           </div>
-          based in India.
+          <span>based in India.</span>
         </div>
 
         <p className="text-textMuted max-w-2xl mx-auto text-lg leading-relaxed mb-12">
           I design and build robust mobile applications and scalable backend systems. Transforming complex problems into elegant, real-world solutions through clean architecture and design thinking.
         </p>
 
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8">
           <a
             href="#projects"
-            className="px-8 py-4 rounded-full border border-border bg-white/5 hover:bg-white/10 transition-colors text-sm tracking-wide text-white"
+            className="w-full sm:w-auto px-8 py-4 rounded-full border border-border bg-white/5 hover:bg-white/10 transition-colors text-sm tracking-wide text-white"
           >
             See Works
           </a>
           <a
             href="/Sumit_CV.pdf"
             download="Sumit_CV.pdf"
-            className="px-8 py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors text-sm tracking-wide font-medium"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors text-sm tracking-wide font-medium"
           >
             Download CV
           </a>

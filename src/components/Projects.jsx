@@ -188,12 +188,12 @@ const Projects = () => {
               </button>
 
               {/* Massive Screenshot Banner */}
-              <div className="w-full h-[400px] relative">
+              <div className="w-full h-[200px] sm:h-[400px] relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10 hidden sm:block"></div>
                 <img src={selectedProjectDetail.image} alt={selectedProjectDetail.title} className="w-full h-full object-cover rounded-t-[2rem]" />
               </div>
 
-              <div className="p-8 sm:p-12 -mt-20 relative z-20">
+              <div className="p-6 sm:p-12 -mt-10 sm:-mt-20 relative z-20">
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProjectDetail.techStack.map(tech => (
                     <span key={tech} className="px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-xs uppercase tracking-widest text-white">{tech}</span>
@@ -210,14 +210,14 @@ const Projects = () => {
                   {selectedProjectDetail.description}
                 </p>
 
-                <div className="flex flex-wrap gap-4 pt-8 border-t border-border">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-8 border-t border-border">
                   {selectedProjectDetail.liveLink && selectedProjectDetail.liveLink !== '#' && (
-                    <a href={selectedProjectDetail.liveLink} target="_blank" rel="noreferrer" className="px-8 py-4 bg-white text-black hover:bg-white/90 rounded-full transition-colors flex items-center gap-3 font-medium text-sm tracking-wide">
+                    <a href={selectedProjectDetail.liveLink} target="_blank" rel="noreferrer" className="w-full sm:w-auto justify-center px-8 py-4 bg-white text-black hover:bg-white/90 rounded-full transition-colors flex items-center gap-3 font-medium text-sm tracking-wide">
                       <ExternalLink size={18} /> Open Live Site
                     </a>
                   )}
                   {selectedProjectDetail.githubLink && selectedProjectDetail.githubLink !== '#' && (
-                    <a href={selectedProjectDetail.githubLink} target="_blank" rel="noreferrer" className="px-8 py-4 bg-white/5 border border-border hover:bg-white/10 text-white rounded-full transition-colors flex items-center gap-3 font-medium text-sm tracking-wide">
+                    <a href={selectedProjectDetail.githubLink} target="_blank" rel="noreferrer" className="w-full sm:w-auto justify-center px-8 py-4 bg-white/5 border border-border hover:bg-white/10 text-white rounded-full transition-colors flex items-center gap-3 font-medium text-sm tracking-wide">
                       <FaGithub size={18} /> View on GitHub
                     </a>
                   )}
