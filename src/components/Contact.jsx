@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Contact = () => {
   return (
     <section id="contact" className="py-32 flex flex-col items-center justify-center text-center mt-20 relative">
-      
+
       {/* Background soft glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-white/5 rounded-[100%] blur-[120px] pointer-events-none"></div>
 
@@ -19,9 +19,9 @@ const Contact = () => {
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
           Available for opportunities
         </p>
-        
+
         <h2 className="text-6xl md:text-8xl font-light mb-12 tracking-tight">
-          Let's work <br/>
+          Let's work <br />
           <span className="font-serif italic text-white/90">together</span>
         </h2>
 
@@ -43,7 +43,7 @@ const Contact = () => {
           </a>
           <div className="w-1 h-1 rounded-full bg-border hidden sm:block"></div>
           <a
-            href="/Sumit_Resume.pdf"
+            href="/Sumit_CV.pdf"
             download="Sumit_CV.pdf"
             className="hover:text-white text-slate-400 transition-colors uppercase tracking-widest text-sm relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300"
           >
