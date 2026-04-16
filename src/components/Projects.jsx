@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Plus, Trash2, Edit2, X } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
 const defaultProjects = [
@@ -34,59 +34,7 @@ const defaultProjects = [
 ];
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-  const [isManageMode, setIsManageMode] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [editingProject, setEditingProject] = useState(null);
   const [selectedProjectDetail, setSelectedProjectDetail] = useState(null);
-  const [formData, setFormData] = useState({
-    title: '', description: '', techStack: '', liveLink: '', githubLink: '', image: '',
-  });
-
-  useEffect(() => {
-    const saved = localStorage.getItem('portfolio_projects_v6');
-    if (saved) {
-      setProjects(JSON.parse(saved));
-    } else {
-      setProjects(defaultProjects);
-      localStorage.setItem('portfolio_projects_v6', JSON.stringify(defaultProjects));
-    }
-  }, []);
-
-  const saveProjects = (updatedProjects) => {
-    setProjects(updatedProjects);
-    localStorage.setItem('portfolio_projects_v6', JSON.stringify(updatedProjects));
-  };
-
-  const handleDelete = (id) => saveProjects(projects.filter((p) => p.id !== id));
-
-  const openEdit = (project) => {
-    setEditingProject(project);
-    setFormData({ ...project, techStack: project.techStack.join(', ') });
-    setShowModal(true);
-  };
-
-  const handleAddNew = () => {
-    setEditingProject(null);
-    setFormData({ title: '', description: '', techStack: '', liveLink: '', githubLink: '', image: '' });
-    setShowModal(true);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const projectData = {
-      id: editingProject ? editingProject.id : Date.now().toString(),
-      ...formData,
-      techStack: formData.techStack.split(',').map((s) => s.trim()).filter(Boolean),
-      image: formData.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop',
-    };
-    saveProjects(
-      editingProject
-        ? projects.map((p) => (p.id === editingProject.id ? projectData : p))
-        : [...projects, projectData]
-    );
-    setShowModal(false);
-  };
 
   return (
     <section id="projects" className="py-16 sm:py-24 border-t border-border mt-16 sm:mt-20">
@@ -99,18 +47,12 @@ const Projects = () => {
             Featured <span className="font-serif italic text-white/90">Projects</span>
           </h2>
         </motion.div>
-        <button
-          onClick={() => setIsManageMode(!isManageMode)}
-          className="text-xs tracking-widest uppercase border-b border-border hover:text-white pb-1 transition-colors text-textMuted"
-        >
-          {isManageMode ? 'Done' : 'Manage List'}
-        </button>
       </div>
 
       {/* Project Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
         <AnimatePresence>
-          {projects.map((project, index) => (
+          {defaultProjects.map((project, index) => (
             <motion.div
               layout
               initial={{ opacity: 0, y: 30 }}
@@ -118,26 +60,9 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               key={project.id}
-              onClick={() => !isManageMode && setSelectedProjectDetail(project)}
-              className={`group relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-surface border border-border transition-all duration-500 ${!isManageMode ? 'cursor-pointer hover:border-borderHover' : ''}`}
+              onClick={() => setSelectedProjectDetail(project)}
+              className="group relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-surface border border-border transition-all duration-500 cursor-pointer hover:border-borderHover"
             >
-              {isManageMode && (
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex gap-2">
-                  <button
-                    onClick={() => openEdit(project)}
-                    className="p-2.5 sm:p-3 bg-black/80 text-white rounded-full backdrop-blur hover:bg-white hover:text-black transition-colors"
-                  >
-                    <Edit2 size={14} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(project.id)}
-                    className="p-2.5 sm:p-3 bg-red-900/80 text-white rounded-full backdrop-blur hover:bg-red-500 transition-colors"
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              )}
-
               <div className="h-[280px] sm:h-[350px] md:h-[420px] w-full relative overflow-hidden bg-[#0a0a0a]">
                 <div className="absolute inset-0 bg-black/40 z-10 transition-colors group-hover:bg-transparent" />
                 <div
@@ -204,97 +129,8 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
-
-          {/* Add new tile */}
-          {isManageMode && (
-            <motion.div
-              layout
-              onClick={handleAddNew}
-              className="rounded-[1.5rem] sm:rounded-[2rem] h-[280px] sm:h-[350px] md:h-[420px] flex flex-col items-center justify-center border border-dashed border-border hover:border-white/30 hover:bg-white/5 transition-all cursor-pointer group"
-            >
-              <Plus size={40} className="text-border group-hover:text-white mb-3 transition-colors" />
-              <span className="font-serif italic text-lg sm:text-xl text-textMuted group-hover:text-white transition-colors">
-                Add Project
-              </span>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
-
-      {/* Edit / Add Modal */}
-      <AnimatePresence>
-        {showModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm p-0 sm:p-4"
-          >
-            {/* Bottom sheet on mobile, centered modal on desktop */}
-            <motion.div
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '100%', opacity: 0 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="bg-[#0a0a0a] border border-border p-6 sm:p-8 rounded-t-3xl sm:rounded-3xl w-full sm:max-w-lg relative max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Drag handle on mobile */}
-              <div className="w-10 h-1 bg-border rounded-full mx-auto mb-6 sm:hidden" />
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute top-5 right-5 text-textMuted hover:text-white"
-              >
-                <X size={22} />
-              </button>
-              <h3 className="text-xl sm:text-2xl font-light mb-5 sm:mb-6">
-                Project <span className="font-serif italic">Details</span>
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-                <input
-                  required type="text" placeholder="Title"
-                  value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                />
-                <textarea
-                  required rows="3" placeholder="Description"
-                  value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                />
-                <input
-                  required type="text" placeholder="Tech Stack (comma separated)"
-                  value={formData.techStack} onChange={(e) => setFormData({ ...formData, techStack: e.target.value })}
-                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                />
-                {/* Stack these on mobile */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <input
-                    type="text" placeholder="Live Link"
-                    value={formData.liveLink} onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })}
-                    className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                  />
-                  <input
-                    type="text" placeholder="GitHub Link"
-                    value={formData.githubLink} onChange={(e) => setFormData({ ...formData, githubLink: e.target.value })}
-                    className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                  />
-                </div>
-                <input
-                  type="text" placeholder="Image URL"
-                  value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-white/50"
-                />
-                <button
-                  type="submit"
-                  className="w-full mt-2 py-3.5 sm:py-4 bg-white text-black font-medium rounded-xl hover:bg-white/90 transition-colors text-sm"
-                >
-                  Save Details
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Project Detail Modal */}
       <AnimatePresence>
