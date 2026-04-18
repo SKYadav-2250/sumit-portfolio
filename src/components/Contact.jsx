@@ -44,8 +44,8 @@ const Contact = () => {
             LinkedIn
           </a>
           <a
-            href="/Sumit_Resume.pdf"
-            download="Sumit_Resume.pdf"
+            href="/Sumit_resume.pdf"
+            download="Sumit_resume.pdf"
             className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black hover:bg-white/90 transition-colors text-sm tracking-widest uppercase font-medium"
           >
             Download CV
