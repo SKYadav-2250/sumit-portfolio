@@ -25,7 +25,7 @@ const Hero = () => {
         className="w-full max-w-4xl"
       >
         <p className="text-textMuted tracking-widest uppercase text-xs sm:text-sm mb-4 sm:mb-6">
-          March 2026 — Present
+          April 2026 — Present
         </p>
 
         {/* Name */}
