@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import GalaxyBackground from './GalaxyBackground';
 
 const roles = ["Flutter Developer", "Full Stack Engineer", "Problem Solver"];
 
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [currentDateString, setCurrentDateString] = useState("");
 
   useEffect(() => {
+    const date = new Date();
+    const formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+    setCurrentDateString(`${formattedDate} — Present`);
+
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
@@ -18,6 +24,7 @@ const Hero = () => {
       id="home"
       className="min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-28 pb-12 sm:pt-32 sm:pb-0"
     >
+      <GalaxyBackground />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,7 +32,7 @@ const Hero = () => {
         className="w-full max-w-4xl"
       >
         <p className="text-textMuted tracking-widest uppercase text-xs sm:text-sm mb-4 sm:mb-6">
-          April 2026 — Present
+          {currentDateString}
         </p>
 
         {/* Name */}
