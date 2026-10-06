@@ -77,8 +77,8 @@ const Hero = () => {
             See Works
           </a>
           <a
-            href="/Sumit_resume.pdf"
-            download="Sumit_resume.pdf"
+            href="/Sumit_Resume.pdf"
+            download="Sumit_Resume.pdf"
             className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors text-sm tracking-wide font-medium"
           >
             Download CV
