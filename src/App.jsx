@@ -2,34 +2,37 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Terminal from './components/Terminal';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-background text-textMain selection:bg-white/20 selection:text-white"
-         style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
+    <div className="min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-300 relative overflow-x-hidden">
+      {/* Ambient background glows */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[450px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none -z-10" />
+      <div className="fixed top-1/3 -right-40 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[170px] pointer-events-none -z-10" />
+      <div className="fixed bottom-1/4 -left-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[170px] pointer-events-none -z-10" />
 
-      {/* Subtle top-glow — capped to 100% width so it never overflows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[300px] bg-sky-900/20 rounded-[100%] blur-[120px] pointer-events-none" />
-
+      {/* Floating capsule navigation */}
       <Navbar />
 
-      <main className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+      {/* Main page content sections */}
+      <main className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Hero />
         <About />
+        <Skills />
         <Projects />
+        <Experience />
+        <Terminal />
         <Contact />
       </main>
 
-      {/* Marquee Footer */}
-      <div className="w-full border-t border-border py-4 mt-20 overflow-hidden flex whitespace-nowrap opacity-50">
-        <div className="animate-marquee flex gap-8 whitespace-nowrap text-sm tracking-widest uppercase">
-          {[...Array(10)].map((_, i) => (
-            <span key={i}>BUILDING THE FUTURE • SCALABLE SOLUTIONS • CREATIVE DESIGN •</span>
-          ))}
-        </div>
-      </div>
+      {/* Dynamic tech footer */}
+      <Footer />
     </div>
   );
 }
