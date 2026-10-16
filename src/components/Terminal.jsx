@@ -62,9 +62,15 @@ const Terminal = () => {
   const [input, setInput] = useState('');
   const terminalEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+   const outputRef = useRef(null);
+
+   const scrollToBottom = () => {
+     const el = outputRef.current;
+     if (!el) return;
+     // scroll ONLY inside this element, doesn't touch the page
+     el.scrollTop = el.scrollHeight;
+   };
+
 
   useEffect(() => {
     scrollToBottom();
